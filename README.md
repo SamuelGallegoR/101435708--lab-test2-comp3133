@@ -60,3 +60,8 @@ Author
 Samuel Gallego Rivera
 George Brown College
 Student ID: 101435708
+
+Licence
+------
+🪲 Beetle Labs Inc.
+🪀 GreenConcept LLC.
