@@ -1,0 +1,44 @@
+<!-- Search Input -->
+<div style="margin: 1rem;">
+    <label for="search">Search by Mission Name:</label>
+    <input type="text" id="search" [(ngModel)]="searchTerm" placeholder="Type mission name" />
+</div>
+
+<!-- Filters -->
+<div style="margin: 1rem;">
+    <label for="year">Year:</label>
+    <select id="year" [(ngModel)]="year">
+        <option value="">All</option>
+        <option *ngFor="let y of years" [value]="y">{{ y }}</option>
+    </select>
+
+    <label for="launch">Launch Success:</label>
+    <select id="launch" [(ngModel)]="launchSuccess">
+        <option value="">All</option>
+        <option value="success">Successful</option>
+        <option value="failure">Unsuccessful</option>
+    </select>
+
+    <label for="landing">Landing Success:</label>
+    <select id="landing" [(ngModel)]="landingSuccess">
+        <option value="">All</option>
+        <option value="success">Successful</option>
+        <option value="failure">Unsuccessful</option>
+    </select>
+
+    <button (click)="resetFilters()">Reset Filters</button>
+</div>
+
+<!-- Filtered Missions -->
+<mat-card *ngFor="let mission of getFilteredMissions()" style="margin: 1rem;">
+    <img [src]="mission.links.mission_patch_small" width="100" alt="Patch">
+    <h2>{{ mission.mission_name }} ({{ mission.launch_year }})</h2>
+    <p><strong>Flight #:</strong> {{ mission.flight_number }}</p>
+    <p><strong>Details:</strong> {{ mission.details || 'No details available' }}</p>
+    <p><strong>Rocket:</strong> {{ mission.rocket.rocket_name }} ({{ mission.rocket.rocket_type }})</p>
+    <p>
+        <a *ngIf="mission.links.article_link" [href]="mission.links.article_link" target="_blank">Article</a> |
+        <a *ngIf="mission.links.wikipedia" [href]="mission.links.wikipedia" target="_blank">Wikipedia</a> |
+        <a *ngIf="mission.links.video_link" [href]="mission.links.video_link" target="_blank">Video</a>
+    </p>
+</mat-card>
